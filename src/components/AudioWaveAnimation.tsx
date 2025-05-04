@@ -1,5 +1,6 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
+import anime from 'animejs';
 
 interface AudioWaveAnimationProps {
   className?: string;
@@ -9,51 +10,82 @@ interface AudioWaveAnimationProps {
 
 const AudioWaveAnimation: React.FC<AudioWaveAnimationProps> = ({
   className = '',
-  barCount = 6,
+  barCount = 8,
   active = true,
 }) => {
-  const [heights, setHeights] = useState<number[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!containerRef.current) return;
+    
+    // Clear any previous animations
+    anime.remove(containerRef.current.querySelectorAll('.wave-bar'));
+    
+    // Create or update the bars
+    const bars = containerRef.current.querySelectorAll('.wave-bar');
+    
+    if (bars.length === 0 && containerRef.current) {
+      // Initialize bars if they don't exist
+      for (let i = 0; i < barCount; i++) {
+        const bar = document.createElement('div');
+        bar.className = 'wave-bar';
+        bar.style.height = '20px';
+        containerRef.current.appendChild(bar);
+      }
+    }
+    
     if (active) {
-      // Generate initial random heights
-      const initialHeights = Array.from({ length: barCount }, () => 
-        Math.floor(Math.random() * 40) + 10
-      );
-      setHeights(initialHeights);
-
-      // Update heights with smooth transitions
-      const updateHeights = () => {
-        setHeights(prevHeights => 
-          prevHeights.map(height => {
-            // Create a smoother transition by not changing too drastically
-            const change = Math.floor(Math.random() * 20) - 10; // -10 to +10
-            const newHeight = Math.max(10, Math.min(50, height + change));
-            return newHeight;
-          })
-        );
-      };
-      
-      const interval = setInterval(updateHeights, 600);
-      
-      return () => clearInterval(interval);
+      // Animated wave effect using anime.js
+      anime({
+        targets: '.wave-bar',
+        height: function() {
+          return anime.random(10, 50) + 'px';
+        },
+        duration: function() {
+          return anime.random(400, 700);
+        },
+        delay: function(el, i) {
+          return i * 60;
+        },
+        easing: 'easeInOutSine',
+        complete: function(anim) {
+          if (active) {
+            anim.restart();
+          }
+        },
+        direction: 'alternate',
+        loop: true
+      });
     } else {
       // Set all bars to equal medium height when not active
-      setHeights(Array(barCount).fill(20));
+      anime({
+        targets: '.wave-bar',
+        height: 20,
+        duration: 300,
+        easing: 'easeOutQuad'
+      });
     }
+    
+    return () => {
+      // Clean up animation when component unmounts
+      anime.remove('.wave-bar');
+    };
   }, [active, barCount]);
 
   return (
-    <div className={`flex items-end justify-center h-12 ${className}`}>
-      {heights.map((height, index) => (
+    <div 
+      ref={containerRef} 
+      className={`flex items-end justify-center h-12 gap-[2px] ${className}`}
+    >
+      {Array.from({ length: barCount }).map((_, index) => (
         <div
           key={index}
-          className="wave-bar transition-all duration-300 ease-in-out"
+          className="wave-bar bg-voxa-teal rounded-full w-[3px] transition-colors duration-300"
           style={{
-            height: `${height}px`,
-            animationDelay: `${index * 0.1}s`,
+            height: '20px',
+            opacity: active ? 0.8 : 0.4,
           }}
-        ></div>
+        />
       ))}
     </div>
   );
