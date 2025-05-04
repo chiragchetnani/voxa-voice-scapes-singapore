@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef } from 'react';
-import * as anime from 'animejs';
+import anime from 'animejs/lib/anime.es.js';
 
 interface AudioWaveAnimationProps {
   className?: string;
@@ -36,13 +36,13 @@ const AudioWaveAnimation: React.FC<AudioWaveAnimationProps> = ({
     
     if (active) {
       // Animated wave effect using anime.js
-      anime.default({
+      anime({
         targets: '.wave-bar',
         height: function() {
-          return anime.default.random(10, 50) + 'px';
+          return anime.random(10, 50) + 'px';
         },
         duration: function() {
-          return anime.default.random(400, 700);
+          return anime.random(400, 700);
         },
         delay: function(el, i) {
           return i * 60;
@@ -58,7 +58,7 @@ const AudioWaveAnimation: React.FC<AudioWaveAnimationProps> = ({
       });
     } else {
       // Set all bars to equal medium height when not active
-      anime.default({
+      anime({
         targets: '.wave-bar',
         height: 20,
         duration: 300,
