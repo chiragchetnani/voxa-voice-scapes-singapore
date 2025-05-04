@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
@@ -105,7 +106,7 @@
 
 /* Animated Wave for the sound visualization */
 .wave-bar {
-  @apply transition-all duration-300 ease-out;
+  @apply w-1 mx-0.5 bg-voxa-teal rounded-full;
 }
 
 /* Interactive grid background */
