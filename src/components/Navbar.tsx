@@ -27,27 +27,27 @@ const Navbar = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between py-4">
           {/* Logo */}
-          <a href="#" className="flex items-center">
-            <span className="text-2xl font-bold bg-gradient-to-r from-voxa-teal to-voxa-cyan bg-clip-text text-transparent">
+          <a href="#" className="flex items-center group">
+            <span className="text-2xl font-bold bg-gradient-to-r from-voxa-teal to-voxa-cyan bg-clip-text text-transparent transition-transform duration-300 group-hover:scale-105">
               VOXA
             </span>
           </a>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#features" className="text-voxa-light-text hover:text-voxa-teal transition-colors">
+            <a href="#features" className="nav-link text-voxa-light-text hover:text-voxa-teal transition-colors">
               Features
             </a>
-            <a href="#how-it-works" className="text-voxa-light-text hover:text-voxa-teal transition-colors">
+            <a href="#how-it-works" className="nav-link text-voxa-light-text hover:text-voxa-teal transition-colors">
               How It Works
             </a>
-            <a href="#use-cases" className="text-voxa-light-text hover:text-voxa-teal transition-colors">
+            <a href="#use-cases" className="nav-link text-voxa-light-text hover:text-voxa-teal transition-colors">
               Use Cases
             </a>
-            <a href="#" className="text-voxa-light-text hover:text-voxa-teal transition-colors">
+            <a href="#" className="nav-link text-voxa-light-text hover:text-voxa-teal transition-colors">
               Pricing
             </a>
-            <Button className="bg-voxa-teal text-voxa-darker hover:bg-voxa-teal/90">
+            <Button className="bg-voxa-teal text-voxa-darker hover:bg-voxa-teal/90 transition-all duration-300 hover:-translate-y-0.5">
               Get Started
             </Button>
           </nav>
@@ -55,7 +55,7 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-voxa-light-text"
+            className="md:hidden text-voxa-light-text hover:text-voxa-teal transition-colors"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}

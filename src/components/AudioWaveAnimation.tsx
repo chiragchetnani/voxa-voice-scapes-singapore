@@ -16,19 +16,25 @@ const AudioWaveAnimation: React.FC<AudioWaveAnimationProps> = ({
 
   useEffect(() => {
     if (active) {
-      // Generate random heights for the bars
-      const randomizeHeights = () => {
-        const newHeights = Array.from({ length: barCount }, () => 
-          Math.floor(Math.random() * 40) + 10
+      // Generate initial random heights
+      const initialHeights = Array.from({ length: barCount }, () => 
+        Math.floor(Math.random() * 40) + 10
+      );
+      setHeights(initialHeights);
+
+      // Update heights with smooth transitions
+      const updateHeights = () => {
+        setHeights(prevHeights => 
+          prevHeights.map(height => {
+            // Create a smoother transition by not changing too drastically
+            const change = Math.floor(Math.random() * 20) - 10; // -10 to +10
+            const newHeight = Math.max(10, Math.min(50, height + change));
+            return newHeight;
+          })
         );
-        setHeights(newHeights);
       };
-
-      // Initial heights
-      randomizeHeights();
-
-      // Update heights periodically
-      const interval = setInterval(randomizeHeights, 500);
+      
+      const interval = setInterval(updateHeights, 600);
       
       return () => clearInterval(interval);
     } else {
@@ -42,7 +48,7 @@ const AudioWaveAnimation: React.FC<AudioWaveAnimationProps> = ({
       {heights.map((height, index) => (
         <div
           key={index}
-          className="wave-bar animate-wave"
+          className="wave-bar transition-all duration-300 ease-in-out"
           style={{
             height: `${height}px`,
             animationDelay: `${index * 0.1}s`,
