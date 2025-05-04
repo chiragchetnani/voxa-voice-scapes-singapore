@@ -17,13 +17,13 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
 }) => {
   return (
     <div
-      className={`card group hover:-translate-y-1 ${
-        highlighted ? 'card-highlight' : ''
+      className={`bg-voxa-secondary rounded-xl p-6 shadow-md transition-all duration-300 hover:-translate-y-1 relative ${
+        highlighted ? 'border border-voxa-teal/30' : ''
       }`}
     >
       <div className="flex flex-col h-full">
         <div className="mb-4">
-          <div className="bg-voxa-dark p-3 rounded-lg inline-flex items-center justify-center w-12 h-12 group-hover:bg-voxa-teal/10 transition-colors">
+          <div className="bg-voxa-dark p-3 rounded-lg inline-flex items-center justify-center w-12 h-12 transition-colors">
             <Icon 
               size={24} 
               className="text-voxa-teal" 

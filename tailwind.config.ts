@@ -102,16 +102,16 @@ export default {
 				},
 				'float': {
 					'0%, 100%': { transform: 'translateY(0)' },
-					'50%': { transform: 'translateY(-10px)' }
+					'50%': { transform: 'translateY(-5px)' }
 				},
 				'pulse-glow': {
 					'0%, 100%': { 
-						opacity: '0.8',
-						boxShadow: '0 0 15px rgba(0, 245, 160, 0.5)' 
+						opacity: '0.7',
+						boxShadow: '0 0 5px rgba(0, 245, 160, 0.3)' 
 					},
 					'50%': { 
-						opacity: '1',
-						boxShadow: '0 0 25px rgba(0, 245, 160, 0.8)'
+						opacity: '0.9',
+						boxShadow: '0 0 10px rgba(0, 245, 160, 0.5)'
 					}
 				},
 				'wave': {
@@ -147,7 +147,7 @@ export default {
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
 				'grid-pattern': 'linear-gradient(to right, #25253A 1px, transparent 1px), linear-gradient(to bottom, #25253A 1px, transparent 1px)',
-				'shimmer': 'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(0,245,160,0.1) 50%, rgba(255,255,255,0) 100%)',
+				'shimmer': 'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(0,245,160,0.05) 50%, rgba(255,255,255,0) 100%)',
 			}
 		}
 	},
